@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hajduk momenat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #111;
+            color: #eee;
+            font-family: "Segoe UI", Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            flex-direction: column;
+            box-sizing: border-box;
+            padding: 16px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+        #counter {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff4444;
+            word-break: break-word;
+        }
+        .footer {
+            margin-top: 24px;
+            font-size: 0.95rem;
+            color: #888;
+            word-break: break-all;
+        }
+        @media (min-width: 480px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            #counter {
+                font-size: 2rem;
+            }
+            .footer {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Vrijeme proteklo otkako je hajduk zadnji put osvojio titulu:</h1>
+    <div id="counter">Loading...</div>
+    <div class="image">
+        <div style="display: flex; justify-content: center; gap: 24px; align-items: flex-start; margin-top: 32px;">
+            <img src="/fritula.png" alt="fritula" style="max-width: 230px;">
+            <img src="/magarac.png" alt="magarac" style="max-width: 150px;">
+        </div>
+    </div>
+
+    <script>
+        // Put the last title date here:
+        const lastTitle = new Date("2005-05-28T16:00:00Z"); // Example: May 28, 2005
+
+        function updateCounter() {
+            const now = new Date();
+            let diff = Math.floor((now - lastTitle) / 1000); // seconds difference
+
+            const years = Math.floor(diff / (60 * 60 * 24 * 365));
+            diff -= years * 60 * 60 * 24 * 365;
+
+            const days = Math.floor(diff / (60 * 60 * 24));
+            diff -= days * 60 * 60 * 24;
+
+            const hours = Math.floor(diff / (60 * 60));
+            diff -= hours * 60 * 60;
+
+            const minutes = Math.floor(diff / 60);
+            const seconds = diff - minutes * 60;
+
+            document.getElementById("counter").textContent =
+                `${years} godina, ${days} dana, ${hours} sati, ${minutes} minuta i ${seconds} sekundi`;
+        }
+
+        updateCounter();
+        setInterval(updateCounter, 1000);
+    </script>
+</body>
+</html>
